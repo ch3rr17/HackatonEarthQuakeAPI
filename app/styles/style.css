@@ -1,0 +1,20 @@
+h1.jumbotron{
+	border: 1px solid #1463F0;
+	background-color: #000;
+	color: #fff;
+	font-family: "Starjedi", Arial;
+}
+.panel-body {
+	background: #E0EEEE;
+}
+
+p{
+	font-weight: bold;
+}
+.output{
+	color: green;
+}
+.magnitude{
+	background-color: #FFFF00;
+	color: #FF0000;
+}

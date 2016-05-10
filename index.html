@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='app'>
+	<head>
+		<meta charset="UTF-8">
+			<title>Earthquake Info</title>
+
+			<!-- bower:css -->
+			<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+			<link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+			<!-- endbower -->
+
+			<!-- inject:css -->
+			<link rel="stylesheet" href="/app/styles/style.css">
+			<!-- endinject -->
+
+			<!-- bower:js -->
+			<script src="bower_components/angular/angular.js"></script>
+			<script src="bower_components/jquery/dist/jquery.js"></script>
+			<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+			<script src="bower_components/toastr/toastr.js"></script>
+			<script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+			<script src="bower_components/lodash/lodash.js"></script>
+			<script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+			<!-- endbower -->
+
+		
+			
+	</head>
+		<body ng-controller="EarthQuakeCtrl as vm" background="images/map.jpg">	
+			<div class="container">
+				<h1 class="jumbotron">Hack-A-Thon at 0rigin Code Academy </h1>
+					
+					<!-- Start of panel -->
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="lead">Earthquake Seismology</h3>
+						</div>
+	  					<div class="panel-body">
+	  						<div class="row" text-align:"center">
+	                        	<div class="col-md-6" ng-repeat="quake in vm.QuakeInfo.earthquakes | orderBy:'-timedate'">
+	                        		<div class="row">
+										<div class="col-md-8">
+											<p class="magnitude">Time/Date: <strong class="output">{{quake.timedate}}</strong></p>
+										</div>
+									</div>
+		                        	<div class="row">
+										<div class="col-md-8">
+											<p class="magnitude">Magnitude: <strong class="output">{{quake.magnitude}}</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<p>Region: <strong class="output">{{quake.region}}</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<p>Latitude: <strong class="output">{{quake.lat}}</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<p>Longitude: <strong class="output">{{quake.lon}}</strong></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-8">
+											<a target="_blank" class="btn btn-primary .btn btn-primary btn-sm" ng-href="https://www.google.com/maps?q={{quake.lat}},{{quake.lon}}">Map it!</a>
+										</div>
+									</div>
+				                   <br>
+				                   <ui-gmap-google-map center='vm.loadLatAndLong(quake.lat, quake.lon)' zoom='vm.map.zoom'></ui-gmap-google-map>
+	                        	</div><!-- end of col -->
+	                    	</div><!-- end of main row -->
+	  					</div><!-- end of panel body -->
+					</div><!-- end of panel -->
+					<button type="button" class="btn btn-primary" ng-click="vm.getEarthQuakeInfo()">Get EarthQuake Info</button>
+			</div><!-- end of container -->
+
+			<!-- inject:js -->
+
+			<script src="/app/app.js"></script>
+
+			<script src="/app/eqcontroller.js"></script>
+
+			<script src="/app/eqfactory.js"></script>
+
+			<script src="/app/interceptor.js"></script>
+
+			<!-- endinject -->
+			<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+		</body>
+	</html>
